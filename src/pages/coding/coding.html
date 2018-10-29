@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Coding Week #{{weekNo}}{{day}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item color:light no-padding style="text-align:center">
+    <ion-row>
+      <ion-col *ngFor="let item of topItems">
+        <p style="font-size:12px">
+          <b>{{item.code}}:</b> {{item.count}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-item color:light no-padding style="text-align:center">
+    <ion-row>
+      <ion-col *ngFor="let item of otherTopItems">
+        <p style="font-size:12px">
+          <b>{{item.code}}:</b> {{item.count}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-row *ngFor="let groups of displayGroup; let i=index" style="padding: 10px 5px 0 5px">
+    <ion-col *ngFor="let group of groups; let x=index" style="width: 100%; padding:10px">
+      <ion-card style="width: 100%; margin:0" (click)="selectGroup(i, x)">
+        <ion-card-header style="background-color:#ff80b3; padding:3px; text-align:center">
+          <b>2 - {{group[0] ? group[0].groupNo : ""}} ({{group.length}})</b>
+        </ion-card-header>
+        <ion-card-content style="background-color:#e6e6e6; padding:3px; text-align:left; padding:5px">
+          <div *ngFor="let member of group">
+            <p *ngIf="member.displayName">
+              <b>({{member.code ? member.code : 'X'}})</b> {{member.displayName}}
+              <span *ngIf="member.status == 1" style="font-size:10px; color: orange">MS</span>
+              <span *ngIf="member.status == 2" style="font-size:10px; color: purple">UWP</span>
+              <span *ngIf="member.status == 3" style="font-size:10px; color: red">May kaso</span>
+            </p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

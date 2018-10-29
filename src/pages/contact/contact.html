@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Percentage Week #{{weekNo}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding text-center>
+  <ion-refresher (ionRefresh)="doRefresh($event)"></ion-refresher>
+  <div *ngIf="noRecords == true">
+    <p style="color:gray; padding-top: 20px">No records yet.</p>
+  </div>
+  <div *ngIf="noRecords == false">
+    <ion-row>
+      <ion-col col-2>
+        <b>Group</b>
+      </ion-col>
+      <ion-col col-2>
+        <b>K|O|S#</b>
+      </ion-col>
+      <ion-col col-2>
+        <b>THU</b>
+      </ion-col>
+      <ion-col col-2>
+        <b>K|O|S#</b>
+      </ion-col>
+      <ion-col col-2>
+        <b>SUN</b>
+      </ion-col>
+      <ion-col col-2>
+        <b>Total</b>
+      </ion-col>
+    </ion-row>
+    <hr>
+    <ion-row *ngFor="let group of displayGroups">
+      <ion-col col-2>
+        <b>{{group.groupNo}}</b>
+      </ion-col>
+      <ion-col col-2>
+        <span style="color:gray">{{group.tKab}}|{{group.oTKab}}|{{group.tSNum}}</span>
+      </ion-col>
+      <ion-col col-2>
+        <span style="color:red">{{group.tAve}}</span>
+      </ion-col>
+      <ion-col col-2>
+        <span style="color:gray">{{group.sKab}}|{{group.oSKab}}|{{group.sSNum}}</span>
+      </ion-col>
+      <ion-col col-2>
+        <span style="color:red">{{group.sAve}}</span>
+      </ion-col>
+      <ion-col col-2>
+        <span style="color:red">{{group.totalAve}}</span>
+      </ion-col>
+    </ion-row>
+    <hr>
+    <ion-row>
+      <ion-col col-2>
+        <b></b>
+      </ion-col>
+      <ion-col col-2>
+        <b>{{tKab}}|{{oTKab}}|{{tSNum}}</b>
+      </ion-col>
+      <ion-col col-2>
+        <b>{{tAve}}</b>
+      </ion-col>
+      <ion-col col-2>
+        <b>{{sKab}}|{{oSKab}}|{{sSNum}}</b>
+      </ion-col>
+      <ion-col col-2>
+        <b>{{sAve}}</b>
+      </ion-col>
+      <ion-col col-2>
+        <b>{{totalAve}}</b>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

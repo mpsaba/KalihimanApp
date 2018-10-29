@@ -1,0 +1,7 @@
+{
+  "name": "PasayKalihimanApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

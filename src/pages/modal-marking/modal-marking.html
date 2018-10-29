@@ -1,0 +1,12 @@
+<ion-content padding style="margin: auto">
+  <ion-item>
+    <ion-label><b>{{member.displayName}}</b></ion-label>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let code of codes">
+      <ion-label>({{code.code}}) {{code.desc}}</ion-label>
+      <ion-checkbox (ionChange)="checked(code)" [(ngModel)]="code.isChecked"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <button ion-button block (click)="save()">Save</button>
+</ion-content>

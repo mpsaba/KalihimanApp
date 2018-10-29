@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>({{group.length}}) Group {{group[0] ? group[0].groupNo : ''}} {{group[0] ? group[0].katiwala : ''}}
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding *ngIf="type === 'home'">
+  <ion-list *ngFor="let member of group">
+    <ion-item *ngIf="member.gender =='M' && member.tungkulin" (click)="memberClicked(member)">
+      <p style="font-size: 15px">
+        <b>{{member.displayName}}</b>
+        <span *ngIf="member.status == 1" style="font-size:13px; color: orange">MS</span>
+        <span *ngIf="member.status == 2" style="font-size:13px; color: purple">UWP</span>
+        <span *ngIf="member.status == 3" style="font-size:13px; color: red">May kaso</span>
+      </p>
+      <p style="font-size: 13px">Phone No:
+        <b>{{member.phoneNo}}</b>
+      </p>
+      <p style="font-size: 13px">Address:
+        <b>{{member.address}}</b>
+      </p>
+      <p style="font-size: 13px">Birthday:
+        <b>{{member.bday}}</b>
+      </p>
+      <p style="font-size: 13px">Tungkulin:
+        <b>{{member.tungkulin}}</b>
+      </p>
+      <p style="font-size: 13px">Katiwala:
+        <b>{{member.katiwala}}</b>
+      </p>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngFor="let member of group">
+    <ion-item *ngIf="member.gender =='M' && !member.tungkulin || member.gender === 'M' && member.tungkulin == ''" (click)="memberClicked(member)">
+      <p style="font-size: 15px">
+        <b>{{member.displayName}}</b>
+        <span *ngIf="member.status == 1" style="font-size:13px; color: orange">MS</span>
+        <span *ngIf="member.status == 2" style="font-size:13px; color: purple">UWP</span>
+        <span *ngIf="member.status == 3" style="font-size:13px; color: red">May kaso</span>
+      </p>
+      <p style="font-size: 13px">Phone No:
+        <b>{{member.phoneNo}}</b>
+      </p>
+      <p style="font-size: 13px">Address:
+        <b>{{member.address}}</b>
+      </p>
+      <p style="font-size: 13px">Birthday:
+        <b>{{member.bday}}</b>
+      </p>
+      <p style="font-size: 13px">Tungkulin:
+        <b>{{member.tungkulin}}</b>
+      </p>
+      <p style="font-size: 13px">Katiwala:
+        <b>{{member.katiwala}}</b>
+      </p>
+    </ion-item>
+  </ion-list>
+  <hr>
+  <ion-list *ngFor="let member of group">
+    <ion-item *ngIf="member.gender =='F' && member.tungkulin" (click)="memberClicked(member)">
+      <p style="font-size: 15px">
+        <b>{{member.displayName}}</b>
+        <span *ngIf="member.status == 1" style="font-size:13px; color: orange">MS</span>
+        <span *ngIf="member.status == 2" style="font-size:13px; color: purple">UWP</span>
+        <span *ngIf="member.status == 3" style="font-size:13px; color: red">May kaso</span>
+      </p>
+      <p style="font-size: 13px">Phone No:
+        <b>{{member.phoneNo}}</b>
+      </p>
+      <p style="font-size: 13px">Address:
+        <b>{{member.address}}</b>
+      </p>
+      <p style="font-size: 13px">Birthday:
+        <b>{{member.bday}}</b>
+      </p>
+      <p style="font-size: 13px">Tungkulin:
+        <b>{{member.tungkulin}}</b>
+      </p>
+      <p style="font-size: 13px">Katiwala:
+        <b>{{member.katiwala}}</b>
+      </p>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngFor="let member of group">
+    <ion-item *ngIf="member.gender =='F' && !member.tungkulin || member.gender === 'F' && member.tungkulin == ''" (click)="memberClicked(member)">
+      <p style="font-size: 15px">
+        <b>{{member.displayName}}</b>
+        <span *ngIf="member.status == 1" style="font-size:13px; color: orange">MS</span>
+        <span *ngIf="member.status == 2" style="font-size:13px; color: purple">UWP</span>
+        <span *ngIf="member.status == 3" style="font-size:13px; color: red">May kaso</span>
+      </p>
+      <p style="font-size: 13px">Phone No:
+        <b>{{member.phoneNo}}</b>
+      </p>
+      <p style="font-size: 13px">Address:
+        <b>{{member.address}}</b>
+      </p>
+      <p style="font-size: 13px">Birthday:
+        <b>{{member.bday}}</b>
+      </p>
+      <p style="font-size: 13px">Tungkulin:
+        <b>{{member.tungkulin}}</b>
+      </p>
+      <p style="font-size: 13px">Katiwala:
+        <b>{{member.katiwala}}</b>
+      </p>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-content padding *ngIf="type === 'attendance'">
+  <ion-list>
+    <ion-item *ngFor="let member of group">
+      <ion-label>{{member.displayName}}</ion-label>
+      <ion-checkbox (ionChange)="checked(member)" [(ngModel)]="member.checked"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <button ion-button block (click)="saveAttendance()" [disabled]="checkedMembers.length < 1">Save</button>
+</ion-content>
+
+<ion-content padding *ngIf="type === 'coding'">
+  <ion-item color:light no-padding style="text-align:center">
+    <ion-row>
+      <ion-col *ngFor="let item of topItems">
+        <p style="font-size:12px">
+          <b>{{item.code}}:</b> {{item.count}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-item color:light no-padding style="text-align:center">
+    <ion-row>
+      <ion-col *ngFor="let item of otherTopItems">
+        <p style="font-size:12px">
+          <b>{{item.code}}:</b> {{item.count}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+  <ion-list>
+    <ion-item *ngFor="let member of group" (click)="showCodes(member)">
+      <ion-label>
+        <b>({{member.code ? member.code : 'X'}})</b> {{member.displayName}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

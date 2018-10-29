@@ -1,0 +1,38 @@
+<ion-content padding>
+  <ion-searchbar [(ngModel)]="myInput" (ionInput)="onInput($event)">
+  </ion-searchbar>
+
+  <ion-list>
+    <ion-item *ngFor="let member of searchedMembers" (click)="memberClicked(member)">
+      <p style="font-size: 15px">
+        <ion-icon name="radio-button-on" [ngStyle]="{'color': member.color}" style="font-size:10px"></ion-icon>
+        <b>{{member.displayName}}</b>
+        <span *ngIf="member.status == 1" style="font-size:13px; color: orange">MS</span>
+        <span *ngIf="member.status == 2" style="font-size:13px; color: purple">UWP</span>
+        <span *ngIf="member.status == 3" style="font-size:13px; color: red">May kaso</span>
+        <span *ngIf="member.status == 4" style="font-size:13px">Transfer</span>
+        <span *ngIf="member.status == 5" style="font-size:13px">Inter-Purok</span>
+        <span *ngIf="member.status == 6" style="font-size:13px">Natiwalag</span>
+        <span *ngIf="member.status == 7" style="font-size:13px">Namatay</span>
+      </p>
+      <p style="font-size: 13px">Phone No:
+        <b>{{member.phoneNo}}</b>
+      </p>
+      <p style="font-size: 13px">Address:
+        <b>{{member.address}}</b>
+      </p>
+      <p style="font-size: 13px">Birthday:
+        <b>{{member.bday}}</b>
+      </p>
+      <p style="font-size: 13px">Group No:
+        <b>{{member.groupNo}}</b>
+      </p>
+      <p style="font-size: 13px">Tungkulin:
+        <b>{{member.tungkulin}}</b>
+      </p>
+      <p style="font-size: 13px">Katiwala:
+        <b>{{member.katiwala}}</b>
+      </p>
+    </ion-item>
+  </ion-list>
+</ion-content>

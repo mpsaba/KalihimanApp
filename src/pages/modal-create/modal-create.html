@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Add a member</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row style="padding: 0">
+    <ion-col>
+      <ion-item>
+        <ion-input style="font: 12px roboto, sans-serif " type="text" name="firstName" [(ngModel)]="member.firstName" placeholder="First name"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-input style="font: 12px roboto, sans-serif " type="text" name="lastName" [(ngModel)]="member.lastName" placeholder="Last name"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="padding: 0">
+    <ion-col>
+      <ion-item>
+        <ion-input style="font: 12px roboto, sans-serif " type="number" name="phoneNo" [(ngModel)]="member.phoneNo" placeholder="Phone number"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-input style="font: 12px roboto, sans-serif " type="text" name="bday" [(ngModel)]="member.bday" placeholder="Birthday"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="padding: 0">
+    <ion-col>
+      <ion-item>
+        <ion-input style="font: 12px roboto, sans-serif " type="text" name="katiwala" [(ngModel)]="member.katiwala" placeholder="Katiwala"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-input style="font: 12px roboto, sans-serif " type="number" name="groupNo" [(ngModel)]="member.groupNo" placeholder="Group number"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item style="margin-top:10px">
+        <ion-input style="font: 12px roboto, sans-serif " type="text" name="address" [(ngModel)]="member.address" placeholder="Address"></ion-input>
+      </ion-item>
+
+      <!-- <ion-item style="margin-top:10px ">
+        <ion-label color="primary" stacked>1() 2() 3(May kaso) 4(Transfer)</ion-label>
+        <ion-label color="primary" stacked>5(Inter-Purok) 6(Tiwalag) 7(Namatay)</ion-label>
+        <ion-input style="font: 12px roboto, sans-serif " type="number" name="status" [(ngModel)]="member.status" placeholder="Status"></ion-input>
+      </ion-item> -->
+
+
+      <ion-item style="margin-top:10px ">
+        <ion-input style="font: 12px roboto, sans-serif " type="text" name="tungkulin" [(ngModel)]="member.tungkulin" placeholder="Tungkulin"></ion-input>
+      </ion-item>
+
+
+      <ion-item style="margin-top:10px ">
+        <ion-input style="font: 12px roboto, sans-serif " type="text" name="remarks" [(ngModel)]="member.remarks" placeholder="Remarks"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-item>
+    <ion-select style="font: 12px roboto, sans-serif" [(ngModel)]="member.status"  [selectOptions]="selectOptions" placeholder="Status">
+      <ion-option [value]="'1'">MS</ion-option>
+      <ion-option [value]="'2'">UWP</ion-option>
+      <ion-option [value]="'3'">May Kaso</ion-option>
+      <ion-option [value]="'4'">Transfer</ion-option>
+      <ion-option [value]="'5'">Inter-Purok</ion-option>
+      <ion-option [value]="'6'">Natiwalag</ion-option>
+      <ion-option [value]="'7'">Namatay</ion-option>
+      <ion-option [value]="">None</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-item style="margin-top:10px">
+    <button ion-button round [ngStyle]="{'background-color': buttonMaleColor}" (click)="genderClicked('M')">Male</button>
+    <button ion-button round [ngStyle]="{'background-color': buttonFemaleColor}" (click)="genderClicked('F')">Female</button>
+  </ion-item>
+
+  <ion-item style="margin-top:10px">
+    <button ion-button round [ngStyle]="{'background-color': buttonBinhiColor}" (click)="kapisananClicked('Binhi')">Binhi</button>
+    <button ion-button round [ngStyle]="{'background-color': buttonKadiwaColor}" (click)="kapisananClicked('Kadiwa')">Kadiwa</button>
+    <button ion-button round [ngStyle]="{'background-color': buttonBuklodColor}" (click)="kapisananClicked('Buklod')">Buklod</button>
+  </ion-item>
+
+
+  <button ion-button block (click)="save()" [disabled]="!member.firstName || !member.lastName || !member.groupNo || !member.gender || !member.kapisanan">Save</button>
+</ion-content>

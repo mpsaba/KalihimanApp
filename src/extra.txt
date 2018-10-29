@@ -1,0 +1,185 @@
+
+
+  getMembersFromGoogleSheet(data) {
+
+    let membersData: any = data;
+    let newArr = [];
+
+    membersData.forEach(element => {
+      let member = element.split(",");
+      newArr.push({
+        lastName: member[0],
+        firstName: member[1],
+        phoneNo: member[2],
+        address: member[3],
+        gender: member[4],
+        kapisanan: member[5],
+        groupNo: member[6],
+        status: member[7]
+      });
+
+
+      // this.afDatabase.list('members').push({
+      //   lastName: member[0],
+      //   firstName: member[1],
+      //   phoneNo: member[2],
+      //   address: member[3],
+      //   gender: member[4],
+      //   kapisanan: member[5],
+      //   groupNo: member[6],
+      //   status: member[7]
+      // })
+    });
+
+    this.members = newArr;
+    localStorage.setItem('members', JSON.stringify({ members: this.members }));
+
+    let binCount = 0;
+    let kadCount = 0;
+    let bukCount = 0;
+    let msCount = 0;
+    let uwpCount = 0;
+
+
+    this.members.forEach(element => {
+
+      let color: any;
+      if (element.kapisanan === 'Binhi') {
+        binCount++;
+        color = "blue"
+      }
+      else if (element.kapisanan === 'Kadiwa') {
+        kadCount++;
+        color = "red"
+      }
+      else if (element.kapisanan === 'Buklod') {
+        bukCount++;
+        color = "green"
+      }
+
+      if (element.status == 1) {
+        msCount++;
+      }
+      else if (element.status == 2) {
+        uwpCount++;
+      } +
+
+
+        this.perPurokGroups[parseInt(element.groupNo) - 1].push({
+          firstName: element.firstName,
+          lastName: element.lastName,
+          phoneNo: element.phoneNo,
+          address: element.address,
+          gender: element.gender,
+          displayName: element.firstName + " " + element.lastName,
+          color: color,
+          kapisanan: element.kapisanan,
+          groupNo: element.groupNo,
+          status: element.status
+        });
+
+    });
+
+    this.topItems = {
+      binCount: binCount,
+      kadCount: kadCount,
+      bukCount: bukCount,
+      msCount: msCount,
+      uwpCount: uwpCount,
+      allCount: this.members.length
+    }
+
+
+    let counter = 0;
+    for (let i = 0; i < this.perPurokGroups.length; i += 2) {
+      this.displayGroup[counter] = [
+        this.perPurokGroups[i],
+        this.perPurokGroups[i + 1]
+      ];
+
+      counter++;
+    }
+
+    setTimeout(() => {
+      this.hideLoading();
+    }, 1000);
+  }
+
+  getMembersFromLocalStorage(data) {
+
+    let membersData: any = data;
+    let newArr = [];
+
+    membersData.forEach(element => {
+      newArr.push(element);
+    });
+
+    this.members = newArr;
+    localStorage.setItem('members', JSON.stringify({ members: this.members }));
+
+    let binCount = 0;
+    let kadCount = 0;
+    let bukCount = 0;
+    let msCount = 0;
+    let uwpCount = 0;
+
+
+    this.members.forEach(element => {
+
+      let color: any;
+      if (element.kapisanan === 'Binhi') {
+        binCount++;
+        color = "blue"
+      }
+      else if (element.kapisanan === 'Kadiwa') {
+        kadCount++;
+        color = "red"
+      }
+      else if (element.kapisanan === 'Buklod') {
+        bukCount++;
+        color = "green"
+      }
+
+      if (element.status == 1) {
+        msCount++;
+      }
+      else if (element.status == 2) {
+        uwpCount++;
+      }
+      this.perPurokGroups[parseInt(element.groupNo) - 1].push({
+        firstName: element.firstName,
+        lastName: element.lastName,
+        phoneNo: element.phoneNo,
+        address: element.address,
+        gender: element.gender,
+        displayName: element.firstName + " " + element.lastName,
+        color: color,
+        kapisanan: element.kapisanan,
+        groupNo: element.groupNo,
+        status: element.status
+      });
+    });
+
+    this.topItems = {
+      binCount: binCount,
+      kadCount: kadCount,
+      bukCount: bukCount,
+      msCount: msCount,
+      uwpCount: uwpCount,
+      allCount: this.members.length
+    }
+
+    let counter = 0;
+    for (let i = 0; i < this.perPurokGroups.length; i += 2) {
+      this.displayGroup[counter] = [
+        this.perPurokGroups[i],
+        this.perPurokGroups[i + 1]
+      ];
+
+      counter++;
+    }
+
+    setTimeout(() => {
+      this.hideLoading();
+    }, 1000);
+  }

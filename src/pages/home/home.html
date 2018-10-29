@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Purok 2 Dashboard</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="doRefresh()">
+        <ion-icon style="color:white" name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-item color:light no-padding style="text-align:center">
+    <ion-row>
+      <ion-col>
+        <p style="font-size:12px">
+          <ion-icon name="radio-button-on" style="color:blue"></ion-icon> {{topItems.binCount}}</p>
+      </ion-col>
+      <ion-col>
+        <p style="font-size:12px">
+          <ion-icon name="radio-button-on" style="color:red"></ion-icon> {{topItems.kadCount}}</p>
+      </ion-col>
+      <ion-col>
+        <p style="font-size:12px">
+          <ion-icon name="radio-button-on" style="color:green"></ion-icon> {{topItems.bukCount}}</p>
+      </ion-col>
+      <ion-col>
+        <p style="font-size:12px">
+          <b>MS:</b> {{topItems.msCount}}</p>
+      </ion-col>
+      <ion-col>
+        <p style="font-size:12px">
+          <b>UWP:</b> {{topItems.uwpCount}}</p>
+      </ion-col>
+      <ion-col>
+        <p style="font-size:12px">
+          <b>R2-10:</b> {{topItems.kaso}}</p>
+      </ion-col>
+      <ion-col>
+        <p style="font-size:12px">
+          <b>S#</b> {{topItems.allCount}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)"></ion-refresher>
+
+  <ion-fab bottom right>
+    <button ion-fab mini>
+      <ion-icon name="add"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button ion-fab style="color: #b30047" (click)="addMemberClicked()">
+        <ion-icon name="person-add"></ion-icon>
+      </button>
+      <button ion-fab style="color: blue" (click)="displayDashboard('Binhi')">
+        <ion-icon name="radio-button-on"></ion-icon>
+      </button>
+      <button ion-fab style="color: red" (click)="displayDashboard('Kadiwa')">
+        <ion-icon name="radio-button-on"></ion-icon>
+      </button>
+      <button ion-fab style="color: green" (click)="displayDashboard('Buklod')">
+        <ion-icon name="radio-button-on"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-row *ngFor="let groups of displayGroup" style="padding: 10px 5px 0 5px">
+    <ion-col *ngFor="let group of groups" style="width: 100%; padding:10px">
+      <ion-card style="width: 100%; margin:0" (click)="groupClicked(group)">
+        <ion-card-header style="background-color:#ff80b3; padding:3px; text-align:center">
+          <b>2 - {{group[0] ? group[0].groupNo : ""}} ({{group.length}})</b>
+        </ion-card-header>
+        <ion-card-content style="background-color:#e6e6e6; padding:3px; text-align:left; padding:5px">
+          <b>BOY</b>
+          <div *ngFor="let member of group">
+            <p *ngIf="member.gender === 'M' && member.tungkulin">
+              <ion-icon name="radio-button-on" [ngStyle]="{'color': member.color}" style="font-size:10px"></ion-icon> {{member.displayName}}
+              <span *ngIf="member.status == 1" style="font-size:10px; color: orange">MS</span>
+              <span *ngIf="member.status == 2" style="font-size:10px; color: purple">UWP</span>
+              <span *ngIf="member.status == 3" style="font-size:10px; color: red">May kaso</span>
+            </p>
+          </div>
+          <div *ngFor="let member of group">
+            <p *ngIf="member.gender === 'M' && !member.tungkulin || member.gender === 'M' && member.tungkulin == ''">
+              <ion-icon name="radio-button-on" [ngStyle]="{'color': member.color}" style="font-size:10px"></ion-icon> {{member.displayName}}
+              <span *ngIf="member.status == 1" style="font-size:10px; color: orange">MS</span>
+              <span *ngIf="member.status == 2" style="font-size:10px; color: purple">UWP</span>
+              <span *ngIf="member.status == 3" style="font-size:10px; color: red">May kaso</span>
+            </p>
+          </div>
+          <hr>
+          <b>GIRLS</b>
+          <div *ngFor="let member of group">
+            <p *ngIf="member.gender === 'F' && member.tungkulin">
+              <ion-icon name="radio-button-on" [ngStyle]="{'color': member.color}" style="font-size:10px"></ion-icon> {{member.displayName}}
+              <span *ngIf="member.status == 1" style="font-size:10px; color: orange">MS</span>
+              <span *ngIf="member.status == 2" style="font-size:10px; color: purple">UWP</span>
+              <span *ngIf="member.status == 3" style="font-size:10px; color: red">May kaso</span>
+            </p>
+          </div>
+          <div *ngFor="let member of group">
+            <p *ngIf="member.gender === 'F' && !member.tungkulin || member.gender === 'F' && member.tungkulin == ''">
+              <ion-icon name="radio-button-on" [ngStyle]="{'color': member.color}" style="font-size:10px"></ion-icon> {{member.displayName}}
+              <span *ngIf="member.status == 1" style="font-size:10px; color: orange">MS</span>
+              <span *ngIf="member.status == 2" style="font-size:10px; color: purple">UWP</span>
+              <span *ngIf="member.status == 3" style="font-size:10px; color: red">May kaso</span>
+            </p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
